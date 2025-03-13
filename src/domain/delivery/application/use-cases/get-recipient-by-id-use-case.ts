@@ -1,5 +1,5 @@
 import { left, right, type Either } from "../../../../core/errors/either"
-import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found"
+import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found-error"
 import { Recipient } from "../../enterprise/entities/recipient"
 import { RecipientRepository } from "../repositories/recipient-repository"
 

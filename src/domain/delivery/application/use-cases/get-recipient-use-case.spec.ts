@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { makeRecipient } from '../../../../../tests/factories/make-recipient'
 import { InMemoryRecipientRepository } from '../../../../../tests/repositories/in-memory-recipient-repository'
 import { UniqueId } from '../../../../core/entities/unique-id'
-import { ResourceNotFoundUseCaseError } from '../../../../core/errors/resource-not-found'
+import { ResourceNotFoundUseCaseError } from '../../../../core/errors/resource-not-found-error'
 import { GetRecipientByIdUseCase } from './get-recipient-by-id-use-case'
 
 let inMemoryRecipientRepository: InMemoryRecipientRepository

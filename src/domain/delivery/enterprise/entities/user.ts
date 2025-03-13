@@ -2,7 +2,7 @@ import { Entity } from "../../../../core/entities/entity";
 import type { UniqueId } from "../../../../core/entities/unique-id";
 import type { Optional } from "../../../../core/types/optional";
 
-export type Role = 'ADMIN' | 'DELIVERY'
+export type RoleUser = 'ADMIN' | 'DELIVERY'
 
 export interface UserProps {
     id?: UniqueId,
@@ -10,7 +10,7 @@ export interface UserProps {
     email: string,
     cpf: string
     password: string,
-    role: Role
+    role: RoleUser
 }
 
 export class User extends Entity<UserProps> {

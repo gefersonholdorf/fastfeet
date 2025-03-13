@@ -6,7 +6,7 @@ import { CreateOrderUseCase } from "./create-order-use-case";
 import { makeRecipient } from "../../../../../tests/factories/make-recipient";
 import { makeDeliveryPerson } from "../../../../../tests/factories/make-delivery-person";
 import { UniqueId } from "../../../../core/entities/unique-id";
-import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found";
+import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found-error";
 
 let inMemoryRecipientRepository: InMemoryRecipientRepository
 let inMemoryDeliveryPersonRepository: InMemoryDeliveryPersonRepository

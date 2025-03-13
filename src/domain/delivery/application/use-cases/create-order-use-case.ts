@@ -1,6 +1,6 @@
 import { UniqueId } from "../../../../core/entities/unique-id"
 import { left, right, type Either } from "../../../../core/errors/either"
-import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found"
+import { ResourceNotFoundUseCaseError } from "../../../../core/errors/resource-not-found-error"
 import { Order } from "../../enterprise/entities/order"
 import { DeliveryPersonRepository } from "../repositories/delivery-person-repository"
 import { OrderRepository } from "../repositories/order-repository"

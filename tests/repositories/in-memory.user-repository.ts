@@ -23,4 +23,14 @@ export class InMemoryUserRepository implements UserRepository {
 
         this.items[index] = data
     }
+
+    async findByCpf(cpf: string): Promise<User | null> {
+        const item = await this.items.find(item => item.cpf === cpf)
+
+        if(!item) {
+            return null
+        }
+
+        return item
+    }
 }

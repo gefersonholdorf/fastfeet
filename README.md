@@ -10,8 +10,8 @@ API para controle de encomendas de uma transportadora fictícia, a FastFeet.
 - [] Deve ser possível realizar o CRUD das encomendas
 - [] Deve ser possível realizar o CRUD dos destinatários
 - [] Deve ser possível marcar uma encomenda como aguardando (Disponível para retirada)
-- [] Deve ser possível retirar uma encomenda
-- [] Deve ser possível marcar uma encomenda como entregue
+- [X] Deve ser possível retirar uma encomenda
+- [X] Deve ser possível marcar uma encomenda como entregue
 - [] Deve ser possível marcar uma encomenda como devolvida
 - [] Deve ser possível listar as encomendas com endereços de entrega próximo ao local do entregador
 - [] Deve ser possível alterar a senha de um usuário
