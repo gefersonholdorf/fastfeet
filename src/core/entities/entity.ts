@@ -8,10 +8,6 @@ export abstract class Entity<Props> {
         return this._id
     }
 
-    get idString() {
-        return this._id.toString
-    }
-
     get props() {
         return this._props
     }

@@ -1,5 +1,5 @@
-import type { PaginationParams } from "../../../../core/repositories/pagination-params";
-import type { QueryAddress } from "../../../../core/repositories/query-address";
+import { PaginationParams } from "../../../../core/repositories/pagination-params";
+import { QueryAddress } from "../../../../core/repositories/query-address";
 import { Order } from "../../enterprise/entities/order";
 
 export abstract class OrderRepository {
