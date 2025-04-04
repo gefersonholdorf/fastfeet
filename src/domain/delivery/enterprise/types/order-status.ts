@@ -1,0 +1,1 @@
+export type ORDERSTATUS = 'PENDENTE' | 'RETIRADO' | 'ENTREGUE'
