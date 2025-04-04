@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  ENTREGADOR
+}
+
+model Address {
+  id Int @id @default(autoincrement())
+  street String
+  number Int
+  neighborhood String
+  city String
+  state String
+
+  User User[]
+  Recipient Recipient[]
+
+  @@map("addresses")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  cpf String @unique
+  password String
+
+  role Role
+
+  addressId Int? @map("address_id")
+
+  address Address? @relation(fields: [addressId], references: [id])
+
+  Order Order[]
+
+  @@map("users")
+}
+
+model Recipient {
+  id Int @id @default(autoincrement())
+  name String
+
+  addressId Int @map("address_id")
+
+  address Address @relation(fields: [addressId], references: [id])
+
+  Order Order[]
+
+  @@map("recipients")
+}
+
+enum OrderStatus {
+  PENDENTE
+  RETIRADO
+  ENTREGUE
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  status OrderStatus
+  postedOn DateTime @default(now()) @map("posted_on")
+  pickupDate DateTime? @map("pickup_date")
+  deliveryDate DateTime? @map("delivery_date")
+  filename String?
+
+  userId Int @map("user_id")
+  recipientId Int @map("recipient_id")
+
+  user User @relation(fields: [userId], references: [id])
+  recipient Recipient @relation(fields: [recipientId], references: [id])
+
+  @@map("orders")
+}
