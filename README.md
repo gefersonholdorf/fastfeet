@@ -26,3 +26,6 @@
 
 ## Fluxograma - Fluxo da Encomenda
 ![alt text](image.png)
+
+## Diagrama de Classe
+![image](https://github.com/user-attachments/assets/01228e35-c675-4e57-8039-6c41f33cb6cd)
