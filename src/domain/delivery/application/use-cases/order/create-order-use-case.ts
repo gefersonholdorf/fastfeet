@@ -3,31 +3,24 @@ import { UniqueEntityId } from "src/core/entities/unique-entity-id"
 import { OrderRepository } from "../../repositories/order-repository"
 import { Order } from "src/domain/delivery/enterprise/entities/order"
 import { ResourceNotFoundError } from "src/core/exceptions/errors/resource-not-found-error"
-import { UserRepository } from "../../repositories/user-repository"
 import { RecipientRepository } from "../../repositories/recipient-repository"
+import { Injectable } from "@nestjs/common"
 
 export interface CreateOrderUseCaseRequest {
-    userId: number
     recipientId: number
 }
 
 export type CreateOrderUseCaseResponse = Either<ResourceNotFoundError, {}>
 
+@Injectable()
 export class CreateOrderUseCase {
     constructor(
         private readonly orderRepository: OrderRepository,
-        private readonly userRepository: UserRepository,
         private readonly recipientRepository: RecipientRepository
     ) {}
 
     async execute(data: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse> {
-        const {userId, recipientId} = data
-
-        const user = await this.userRepository.findById(userId)
-
-        if(!user) {
-            return left(new ResourceNotFoundError())
-        }
+        const {recipientId} = data
 
         const recipient = await this.recipientRepository.findById(recipientId)
 
@@ -37,7 +30,7 @@ export class CreateOrderUseCase {
 
 
         const order = Order.create({
-            userId: new UniqueEntityId(userId), recipientId: new UniqueEntityId(recipientId)
+            recipientId: new UniqueEntityId(recipientId)
         })
 
         await this.orderRepository.create(order)

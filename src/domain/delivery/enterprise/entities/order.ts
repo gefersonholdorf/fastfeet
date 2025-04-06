@@ -9,7 +9,7 @@ export interface OrderProps {
     pickupDate?: Date | null
     deliveryDate?: Date | null
     filename?: string | null
-    userId: UniqueEntityId
+    userId?: UniqueEntityId | null
     recipientId: UniqueEntityId
 }
 
@@ -56,7 +56,11 @@ export class Order extends EntityBase<OrderProps> {
     }
 
     get userId() {
-        return this.props.userId
+        return this.props.userId!
+    }
+
+    set userId(userId: UniqueEntityId) {
+        this.props.userId = userId
     }
 
     get recipientId() {
@@ -74,7 +78,7 @@ export class Order extends EntityBase<OrderProps> {
                 pickupDate: props.pickupDate ?? null,
                 deliveryDate: props.deliveryDate ?? null,
                 filename: props.filename ?? null,
-                userId: props.userId,
+                userId: props.userId ?? null,
                 recipientId: props.recipientId
             },
             id ?? new UniqueEntityId()

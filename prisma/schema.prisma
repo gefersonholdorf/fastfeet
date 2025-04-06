@@ -77,10 +77,10 @@ model Order {
   deliveryDate DateTime? @map("delivery_date")
   filename String?
 
-  userId Int @map("user_id")
+  userId Int? @map("user_id")
   recipientId Int @map("recipient_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
   recipient Recipient @relation(fields: [recipientId], references: [id])
 
   @@map("orders")

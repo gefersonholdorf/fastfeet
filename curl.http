@@ -28,7 +28,7 @@ POST {{url}}/auth/session
 Content-Type: application/json
 
 {
-    "cpf": "10685498217",
+    "cpf": "10678456917",
     "password": "senha123"
 }
 
@@ -52,3 +52,19 @@ Authorization: Bearer {{token}}
         "state": "SC"
     }
 }
+
+###
+
+POST {{url}}/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "recipientId": 1
+}
+
+###
+
+POST {{url}}/orders/withdrawn/1
+Content-Type: application/json
+Authorization: Bearer {{token}}

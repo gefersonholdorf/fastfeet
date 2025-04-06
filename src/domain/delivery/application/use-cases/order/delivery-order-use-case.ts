@@ -1,6 +1,7 @@
 import { left, right, type Either } from "src/core/exceptions/either"
 import { OrderRepository } from "../../repositories/order-repository"
 import { ResourceNotFoundError } from "src/core/exceptions/errors/resource-not-found-error"
+import { Injectable } from "@nestjs/common"
 
 export interface DeliveryOrderUseCaseRequest {
     orderId: number
@@ -9,6 +10,7 @@ export interface DeliveryOrderUseCaseRequest {
 
 export type DeliveryOrderUseCaseResponse = Either<ResourceNotFoundError, {}>
 
+@Injectable()
 export class DeliveryOrderUseCase {
     constructor(
         private readonly orderRepository: OrderRepository,
@@ -26,7 +28,7 @@ export class DeliveryOrderUseCase {
         order.deliveryDate = new Date()
         order.filename = filename
 
-        await this.orderRepository.save(order)
+        await this.orderRepository.save(order, order.id.value)
 
         return right({})
     }

@@ -1,0 +1,49 @@
+import { Injectable } from "@nestjs/common";
+import { PaginationParams } from "src/core/repositories/pagination-params";
+import { OrderRepository } from "src/domain/delivery/application/repositories/order-repository";
+import { Order } from "src/domain/delivery/enterprise/entities/order";
+import { PrismaService } from "../prisma.service";
+import { PrismaOrderMapper } from "../mappers/prisma-order-mapper";
+
+@Injectable()
+export class PrismaOrderRepository implements OrderRepository {
+    constructor(private readonly prisma: PrismaService) {}
+
+    async create(order: Order): Promise<void> {
+        const data = PrismaOrderMapper.toPrisma(order)
+
+        await this.prisma.order.create({data})
+    }
+
+    async findById(id: number): Promise<Order | null> {
+        const order = await this.prisma.order.findUnique({
+            where: {
+                id
+            }
+        })
+        
+        if(!order) {
+            return null
+        }
+        
+        return PrismaOrderMapper.toDomain(order)
+    }
+
+    findAll(params: PaginationParams): Promise<Order[]> {
+        throw new Error("Method not implemented.");
+    }
+
+    async save(order: Order, id: number): Promise<void> {
+        const data = PrismaOrderMapper.toPrisma(order)
+
+        await this.prisma.order.update(
+            {
+                data, 
+                where: {
+                    id
+                }
+            }
+        )
+    }
+
+}

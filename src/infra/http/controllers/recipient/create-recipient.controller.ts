@@ -28,7 +28,6 @@ export class CreateRecipientController{
     async handle(@Body() body: CreateRecipientSchema, @Req() req: any) {
         const {name, address} = createRecipientSchema.parse(body)
 
-        console.log(req.user)
         await this.createRecipientUseCase.execute({
             name, address
         })

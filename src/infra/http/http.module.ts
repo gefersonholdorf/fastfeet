@@ -9,10 +9,21 @@ import { AuthModule } from "../auth/auth.module";
 import { LoginController } from "./controllers/auth/login.controller";
 import { LoginUseCase } from "src/domain/delivery/application/use-cases/auth/login-use-case";
 import { EnvModule } from "../env/env.module";
+import { CreateOrderUseCase } from "src/domain/delivery/application/use-cases/order/create-order-use-case";
+import { WithdrawnOrderUseCase } from "src/domain/delivery/application/use-cases/order/withdraw-order-use-case";
+import { DeliveryOrderUseCase } from "src/domain/delivery/application/use-cases/order/delivery-order-use-case";
+import { CreateOrderController } from "./controllers/order/create-order.controller";
+import { WithdrawnOrderController } from "./controllers/order/withdrawn-order.controller";
 
 @Module({
-    imports: [DatabaseModule, CryptographyModule, AuthModule, EnvModule],
-    controllers: [CreateRecipientController, CreateUserController, LoginController],
-    providers: [CreateRecipientUseCase, CreateUserUseCase, LoginUseCase]
+    imports: [
+        DatabaseModule, CryptographyModule, AuthModule, EnvModule
+    ],
+    controllers: [
+        CreateRecipientController, CreateUserController, LoginController, CreateOrderController, WithdrawnOrderController
+    ],
+    providers: [
+        CreateRecipientUseCase, CreateUserUseCase, LoginUseCase, CreateOrderUseCase, WithdrawnOrderUseCase, DeliveryOrderUseCase
+    ]
 })
 export class HttpModule{}
