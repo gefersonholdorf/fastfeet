@@ -1,6 +1,7 @@
 import { BadRequestException, Body, Controller, HttpCode, Post, UnauthorizedException } from "@nestjs/common";
 import { UnauthorizedError } from "src/core/exceptions/errors/unauthorized-error";
 import { LoginUseCase } from "src/domain/delivery/application/use-cases/auth/login-use-case";
+import { Public } from "src/infra/auth/jwt/is-public";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -14,6 +15,7 @@ type LoginSchema = z.infer<typeof loginSchema>
 export class LoginController{
     constructor(private readonly loginUseCase: LoginUseCase) {}
 
+    @Public()
     @Post()
     @HttpCode(200)
     async handle(@Body() body: LoginSchema) {

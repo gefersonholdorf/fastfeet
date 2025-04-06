@@ -1,6 +1,7 @@
 import { BadRequestException, Body, ConflictException, Controller, HttpCode, Post } from "@nestjs/common";
 import { ExistingUserError } from "src/core/exceptions/errors/existing-user";
 import { CreateUserUseCase } from "src/domain/delivery/application/use-cases/user/create-user-use-case";
+import { Public } from "src/infra/auth/jwt/is-public";
 import { z } from "zod";
 
 const createUserSchema = z.object({
