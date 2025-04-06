@@ -1,10 +1,11 @@
 import { EntityBase } from "src/core/entities/entity-base";
 import { UniqueEntityId } from "src/core/entities/unique-entity-id";
+import { Address } from "./address";
 
 export interface RecipientProps {
     recipientId?: UniqueEntityId
     name: string
-    addressId: UniqueEntityId
+    address: Address
 }
 
 export class Recipient extends EntityBase<RecipientProps> {
@@ -21,8 +22,8 @@ export class Recipient extends EntityBase<RecipientProps> {
         this.props.name = name
     }
 
-    get addressId() {
-        return this.props.addressId
+    get address() {
+        return this.props.address
     }
 
     static create(
@@ -32,7 +33,7 @@ export class Recipient extends EntityBase<RecipientProps> {
         const recipient = new Recipient(
             {
                 name: props.name,
-                addressId: props.addressId
+                address: props.address
             },
             id ?? new UniqueEntityId()
         )

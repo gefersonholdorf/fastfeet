@@ -1,0 +1,74 @@
+@url= http://localhost:3308
+
+###
+
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "name": "José Felipense",
+    "email": "jose@gmail.com",
+    "cpf": "10685498217",
+    "password": "senha123",
+    "role": "ADMIN",
+    "address": {
+        "street": "Rua Nova",
+        "number": 306,
+        "neighborhood": "Toronto",
+        "city": "Balneário",
+        "state": "SC"
+    }
+}
+
+###
+
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "name": "Pedro Itaramar",
+    "email": "pedro@gmail.com",
+    "cpf": "10678456917",
+    "password": "senha123",
+    "role": "ENTREGADOR",
+    "address": {
+        "street": "Rua Topava",
+        "number": 566,
+        "neighborhood": "Toronto",
+        "city": "Balneário",
+        "state": "SC"
+    }
+}
+
+
+###
+# @name login
+
+POST {{url}}/auth/session
+Content-Type: application/json
+
+{
+    "cpf": "10678456917",
+    "password": "senha123"
+}
+
+###
+
+@token= {{login.response.body.access_token}}
+
+###
+
+POST {{url}}/recipients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Tafarel Ramalho",
+    "address": {
+        "street": "Rua Nunes",
+        "number": 555,
+        "neighborhood": "Toronto",
+        "city": "Balneário",
+        "state": "SC"
+    }
+}

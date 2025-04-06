@@ -18,6 +18,12 @@ enum Role {
   ENTREGADOR
 }
 
+enum OrderStatus {
+  PENDENTE
+  RETIRADO
+  ENTREGUE
+}
+
 model Address {
   id Int @id @default(autoincrement())
   street String
@@ -26,8 +32,8 @@ model Address {
   city String
   state String
 
-  User User[]
-  Recipient Recipient[]
+  recipient Recipient?
+  user User?
 
   @@map("addresses")
 }
@@ -41,9 +47,9 @@ model User {
 
   role Role
 
-  addressId Int? @map("address_id")
+  addressId Int @unique
 
-  address Address? @relation(fields: [addressId], references: [id])
+  address Address @relation(fields: [addressId], references: [id])
 
   Order Order[]
 
@@ -53,20 +59,14 @@ model User {
 model Recipient {
   id Int @id @default(autoincrement())
   name String
-
-  addressId Int @map("address_id")
+  
+  addressId Int @unique
 
   address Address @relation(fields: [addressId], references: [id])
 
   Order Order[]
 
   @@map("recipients")
-}
-
-enum OrderStatus {
-  PENDENTE
-  RETIRADO
-  ENTREGUE
 }
 
 model Order {

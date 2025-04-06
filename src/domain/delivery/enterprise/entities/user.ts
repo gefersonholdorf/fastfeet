@@ -1,6 +1,7 @@
 import { UniqueEntityId } from "src/core/entities/unique-entity-id";
-import type { ROLE } from "../types/role";
+import { ROLE } from "../types/role";
 import { EntityBase } from "src/core/entities/entity-base";
+import { Address } from "./address";
 
 export interface UserProps {
     userId?: UniqueEntityId
@@ -9,7 +10,7 @@ export interface UserProps {
     cpf: string
     password: string
     role?: ROLE
-    addressId?: UniqueEntityId | null
+    address: Address
 }
 
 export class User extends EntityBase<UserProps> {
@@ -50,8 +51,8 @@ export class User extends EntityBase<UserProps> {
         this.props.role = role
     }
 
-    get addressId() {
-        return this.props.addressId
+    get address() {
+        return this.props.address
     }
 
     static create(
@@ -65,7 +66,7 @@ export class User extends EntityBase<UserProps> {
                 cpf: props.cpf,
                 password: props.password,
                 role: props.role ?? 'ADMIN',
-                addressId: props.addressId ?? null
+                address: props.address
             },
             id ?? new UniqueEntityId()
         )
