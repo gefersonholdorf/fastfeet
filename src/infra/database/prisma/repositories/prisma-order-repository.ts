@@ -81,49 +81,60 @@ export class PrismaOrderRepository implements OrderRepository {
         })
     }
 
-    async findAllByAddress(userId: number, params: PaginationParams, addressQuery?: AddressQuery): Promise<Order[]> {
+    async findAllByAddress(userId: number, params: PaginationParams, addressQuery?: AddressQuery): Promise<OrderRecipientAddress[]> {
 
-        if(!addressQuery) {
-            const neighborhoodUser = await this.prisma.user.findFirst({
-                where: {
-                    id: userId
-                },
-                include: {
-                    address: true
-                }
-            })
-    
-            if(!neighborhoodUser) {
-                throw new Error()
+        const {page, quantityPerPage} = params
+        let neighborhood: string;
+
+        const neighborhoodUser = await this.prisma.user.findFirst({
+            where: {
+                id: userId
+            },
+            include: {
+             address: true
             }
-        
-            const orders = await this.prisma.order.findMany({
-                where: {
-                    recipient: {
-                        address: {
-                            neighborhood: neighborhoodUser.address.neighborhood
-                        }
-                    }
-                }
-            })
-
-            return orders.map((order) => {
-                return PrismaOrderMapper.toDomain(order)
-            })
+        })
+    
+        if(!neighborhoodUser) {
+                throw new Error()
         }
+            
+        neighborhood = neighborhoodUser.address.neighborhood
         
         const orders = await this.prisma.order.findMany({
             where: {
                 recipient: {
                     address: {
-                        neighborhood: addressQuery.neighborhood
+                        neighborhood: addressQuery ? addressQuery.neighborhood : neighborhood
+                    }
+                }
+            },
+            skip: (page - 1) * quantityPerPage,
+            take: quantityPerPage,
+            include: {
+                recipient: {
+                    include: {
+                        address: true
                     }
                 }
             }
         })
 
         return orders.map((order) => {
-            return PrismaOrderMapper.toDomain(order)
+            return PrismaOrderDetailsById.toDomain({
+                order: {
+                    id: order.id,
+                    status: order.status,
+                    postedOn: order.postedOn,
+                    pickupDate: order.pickupDate,
+                    deliveryDate: order.deliveryDate,
+                    userId: order.userId,
+                    recipientId: order.recipientId,
+                    filename: order.filename
+                },
+                recipient: order.recipient,
+                address: order.recipient.address
+            })
         })
 
     }

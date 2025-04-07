@@ -18,6 +18,8 @@ import { GetOrderByIdController } from "./controllers/order/get-order-by-id.cont
 import { GetOrderByIdUseCase } from "src/domain/delivery/application/use-cases/order/get-order-by-id-use-case";
 import { FetchOrdersByUserIdController } from "./controllers/order/fetch-orders-by-user-id.controller";
 import { FetchOrdersByUserIdUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-user-id-use-case";
+import { FetchOrderByAddressController } from "./controllers/order/fetch-order-by-address.controller";
+import { FetchOrdersByAddressUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-address-use-case";
 
 @Module({
     imports: [
@@ -25,11 +27,11 @@ import { FetchOrdersByUserIdUseCase } from "src/domain/delivery/application/use-
     ],
     controllers: [
         CreateRecipientController, CreateUserController, LoginController, CreateOrderController, WithdrawnOrderController,
-        GetOrderByIdController, FetchOrdersByUserIdController
+        GetOrderByIdController, FetchOrdersByUserIdController, FetchOrderByAddressController
     ],
     providers: [
         CreateRecipientUseCase, CreateUserUseCase, LoginUseCase, CreateOrderUseCase, WithdrawnOrderUseCase, DeliveryOrderUseCase,
-        GetOrderByIdUseCase, FetchOrdersByUserIdUseCase
+        GetOrderByIdUseCase, FetchOrdersByUserIdUseCase, FetchOrdersByAddressUseCase
     ]
 })
 export class HttpModule{}
