@@ -27,6 +27,7 @@ export class DeliveryOrderUseCase {
 
         order.deliveryDate = new Date()
         order.filename = filename
+        order.status = 'ENTREGUE'
 
         await this.orderRepository.save(order, order.id.value)
 

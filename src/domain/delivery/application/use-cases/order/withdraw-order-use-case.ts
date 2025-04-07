@@ -28,6 +28,7 @@ export class WithdrawnOrderUseCase {
 
         order.pickupDate = new Date()
         order.userId = new UniqueEntityId(userId)
+        order.status = 'RETIRADO'
 
         await this.orderRepository.save(order, order.id.value)
 

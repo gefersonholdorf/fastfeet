@@ -4,11 +4,12 @@
 
 POST {{url}}/users
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "name": "Yago Feleps",
-    "email": "yago@gmail.com",
-    "cpf": "10678456947",
+    "name": "Renato Feleps",
+    "email": "renato@gmail.com",
+    "cpf": "10678456949",
     "password": "senha123",
     "role": "ADMIN",
     "address": {
@@ -65,6 +66,20 @@ Authorization: Bearer {{token}}
 
 ###
 
-POST {{url}}/orders/withdrawn/1
+POST {{url}}/orders/withdrawn/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/orders/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/user/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###

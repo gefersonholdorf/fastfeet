@@ -1,9 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { PaginationParams } from "src/core/repositories/pagination-params";
-import { OrderRepository } from "src/domain/delivery/application/repositories/order-repository";
+import { OrderRepository, type AddressQuery } from "src/domain/delivery/application/repositories/order-repository";
 import { Order } from "src/domain/delivery/enterprise/entities/order";
 import { PrismaService } from "../prisma.service";
 import { PrismaOrderMapper } from "../mappers/prisma-order-mapper";
+import { OrderRecipientAddress } from "src/domain/delivery/enterprise/value-objects/order-recipient-address";
+import { PrismaOrderDetailsById } from "../mappers/prisma-order-details-by-id";
 
 @Injectable()
 export class PrismaOrderRepository implements OrderRepository {
@@ -29,8 +31,101 @@ export class PrismaOrderRepository implements OrderRepository {
         return PrismaOrderMapper.toDomain(order)
     }
 
-    findAll(params: PaginationParams): Promise<Order[]> {
-        throw new Error("Method not implemented.");
+    async findDetailsById(id: number): Promise<OrderRecipientAddress | null> {
+        const order = await this.prisma.order.findFirst({
+            where: {
+                id
+            },
+            include: {
+                recipient: {
+                    include: {
+                        address: true
+                    }
+                }
+            },
+        })
+
+        if(!order) {
+            return null
+        }
+
+        return PrismaOrderDetailsById.toDomain({
+            order: {
+                id: order.id,
+                status: order.status,
+                postedOn: order.postedOn,
+                pickupDate: order.pickupDate,
+                deliveryDate: order.deliveryDate,
+                userId: order.userId,
+                recipientId: order.recipientId,
+                filename: order.filename
+            },
+            recipient: order.recipient,
+            address: order.recipient.address
+        })
+    }
+
+    async findAllByUserId(userId: number, params: PaginationParams): Promise<Order[]> {
+        const {page, quantityPerPage} = params
+        const orders = await this.prisma.order.findMany({
+            where: {
+                userId
+            },
+            skip: (page - 1) * quantityPerPage,
+            take: quantityPerPage
+            
+        })
+
+        return orders.map((order) => {
+            return PrismaOrderMapper.toDomain(order)
+        })
+    }
+
+    async findAllByAddress(userId: number, params: PaginationParams, addressQuery?: AddressQuery): Promise<Order[]> {
+
+        if(!addressQuery) {
+            const neighborhoodUser = await this.prisma.user.findFirst({
+                where: {
+                    id: userId
+                },
+                include: {
+                    address: true
+                }
+            })
+    
+            if(!neighborhoodUser) {
+                throw new Error()
+            }
+        
+            const orders = await this.prisma.order.findMany({
+                where: {
+                    recipient: {
+                        address: {
+                            neighborhood: neighborhoodUser.address.neighborhood
+                        }
+                    }
+                }
+            })
+
+            return orders.map((order) => {
+                return PrismaOrderMapper.toDomain(order)
+            })
+        }
+        
+        const orders = await this.prisma.order.findMany({
+            where: {
+                recipient: {
+                    address: {
+                        neighborhood: addressQuery.neighborhood
+                    }
+                }
+            }
+        })
+
+        return orders.map((order) => {
+            return PrismaOrderMapper.toDomain(order)
+        })
+
     }
 
     async save(order: Order, id: number): Promise<void> {

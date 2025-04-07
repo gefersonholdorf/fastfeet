@@ -18,6 +18,7 @@ export class PrismaOrderMapper {
 
     static toPrisma(order: Order): Prisma.OrderCreateManyInput {
         return {
+            id: order.id.value,
             status: order.status,
             postedOn: order.postedOn,
             pickupDate: order.pickupDate ?? null,

@@ -14,16 +14,22 @@ import { WithdrawnOrderUseCase } from "src/domain/delivery/application/use-cases
 import { DeliveryOrderUseCase } from "src/domain/delivery/application/use-cases/order/delivery-order-use-case";
 import { CreateOrderController } from "./controllers/order/create-order.controller";
 import { WithdrawnOrderController } from "./controllers/order/withdrawn-order.controller";
+import { GetOrderByIdController } from "./controllers/order/get-order-by-id.controller";
+import { GetOrderByIdUseCase } from "src/domain/delivery/application/use-cases/order/get-order-by-id-use-case";
+import { FetchOrdersByUserIdController } from "./controllers/order/fetch-orders-by-user-id.controller";
+import { FetchOrdersByUserIdUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-user-id-use-case";
 
 @Module({
     imports: [
         DatabaseModule, CryptographyModule, AuthModule, EnvModule
     ],
     controllers: [
-        CreateRecipientController, CreateUserController, LoginController, CreateOrderController, WithdrawnOrderController
+        CreateRecipientController, CreateUserController, LoginController, CreateOrderController, WithdrawnOrderController,
+        GetOrderByIdController, FetchOrdersByUserIdController
     ],
     providers: [
-        CreateRecipientUseCase, CreateUserUseCase, LoginUseCase, CreateOrderUseCase, WithdrawnOrderUseCase, DeliveryOrderUseCase
+        CreateRecipientUseCase, CreateUserUseCase, LoginUseCase, CreateOrderUseCase, WithdrawnOrderUseCase, DeliveryOrderUseCase,
+        GetOrderByIdUseCase, FetchOrdersByUserIdUseCase
     ]
 })
 export class HttpModule{}
