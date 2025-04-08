@@ -51,14 +51,33 @@ export class PrismaUserRepository implements UserRepository {
     }
 
     async findById(id: number): Promise<User | null> {
-        throw new Error("Method not implemented.");
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id
+            },
+            include: {
+                address: true
+            }
+        })
+
+        if(!user) {
+            return null
+        }
+
+        return PrismaUserMapper.toDomain(user, user.address)
     }
 
-    findAll(params: PaginationParams): Promise<User[]> {
-        throw new Error("Method not implemented.");
-    }
-    save(user: User): Promise<void> {
-        throw new Error("Method not implemented.");
+    async save(user: User, id: number): Promise<void> {
+        const data = PrismaUserMapper.toPrisma(user)
+
+        await this.prisma.user.update(
+            {
+                data,
+                where: {
+                    id
+                }
+            }
+        )
     }
 
 }

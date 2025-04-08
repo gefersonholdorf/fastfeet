@@ -44,7 +44,7 @@ export class Order extends EntityBase<OrderProps> {
     }
 
     set deliveryDate(deliveryDate: Date) {
-        this.props.pickupDate = deliveryDate
+        this.props.deliveryDate = deliveryDate
     }
 
     get filename() {

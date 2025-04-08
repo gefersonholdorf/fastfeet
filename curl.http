@@ -72,7 +72,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/orders/2
+GET {{url}}/orders/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

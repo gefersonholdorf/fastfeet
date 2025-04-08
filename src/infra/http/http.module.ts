@@ -20,18 +20,24 @@ import { FetchOrdersByUserIdController } from "./controllers/order/fetch-orders-
 import { FetchOrdersByUserIdUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-user-id-use-case";
 import { FetchOrderByAddressController } from "./controllers/order/fetch-order-by-address.controller";
 import { FetchOrdersByAddressUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-address-use-case";
+import { DeliveryOrderController } from "./controllers/order/delivery-order.controller";
+import { StorageModule } from "../storage/storage.module";
+import { ChangePasswordController } from "./controllers/user/change-password.controller";
+import { ChangePasswordUseCase } from "src/domain/delivery/application/use-cases/user/change-password-use-case";
 
 @Module({
     imports: [
-        DatabaseModule, CryptographyModule, AuthModule, EnvModule
+        DatabaseModule, CryptographyModule, AuthModule, EnvModule, StorageModule
     ],
     controllers: [
         CreateRecipientController, CreateUserController, LoginController, CreateOrderController, WithdrawnOrderController,
-        GetOrderByIdController, FetchOrdersByUserIdController, FetchOrderByAddressController
+        GetOrderByIdController, FetchOrdersByUserIdController, FetchOrderByAddressController, DeliveryOrderController,
+        ChangePasswordController
     ],
     providers: [
         CreateRecipientUseCase, CreateUserUseCase, LoginUseCase, CreateOrderUseCase, WithdrawnOrderUseCase, DeliveryOrderUseCase,
-        GetOrderByIdUseCase, FetchOrdersByUserIdUseCase, FetchOrdersByAddressUseCase
+        GetOrderByIdUseCase, FetchOrdersByUserIdUseCase, FetchOrdersByAddressUseCase, DeliveryOrderUseCase,
+        ChangePasswordUseCase
     ]
 })
 export class HttpModule{}

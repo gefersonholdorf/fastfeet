@@ -34,11 +34,4 @@ export class PrismaRecipientRepository implements RecipientRepository {
 
         return PrismaRecipientMapper.toDomain(recipient, recipient.address)
     }
-
-    findAll(params: PaginationParams): Promise<Recipient[]> {
-        throw new Error("Method not implemented.");
-    }
-    save(recipient: Recipient): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
 }
