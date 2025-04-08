@@ -2,6 +2,7 @@ import { AggregateRoot } from "src/core/entities/aggregate-root";
 import { UniqueEntityId } from "src/core/entities/unique-entity-id";
 import type { ORDERSTATUS } from "../types/order-status";
 import { WithdrawnOrderEvent } from "../../application/events/withdrawn-order-event";
+import { DeliveryOrderEvent } from "../../application/events/delivery-order-event";
 
 export interface OrderProps {
     orderId?: UniqueEntityId
@@ -87,6 +88,10 @@ export class Order extends AggregateRoot<OrderProps> {
 
         if(props.userId && props.pickupDate && !props.deliveryDate) {
             order.addDomainEvent(new WithdrawnOrderEvent(order))
+        }
+
+        if(props.userId && props.pickupDate && props.deliveryDate) {
+            order.addDomainEvent(new DeliveryOrderEvent(order))
         }
 
         return order
