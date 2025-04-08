@@ -18,11 +18,20 @@ export class SendEmailUseCase {
     async execute(data: SendEmailUseCaseRequest): Promise<SendEmailUseCaseResponse> {
         const {to, subject, text} = data
 
+        console.log('Entrou no use case de envio de e-mail')
+
         const communication = Communication.create({
             to, subject, text
         })
 
-        await this.emailService.sendEmail(communication)
+        try {
+            await this.emailService.sendEmail(communication)
+
+            console.log('E-mail enviado com sucesso!')
+        } catch (error) {
+            console.log('Não enviou o e-mail')
+            console.log(error)
+        }
 
         return right({})
     }

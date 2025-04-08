@@ -28,7 +28,6 @@ export class CreateOrderUseCase {
             return left(new ResourceNotFoundError())
         }
 
-
         const order = Order.create({
             recipientId: new UniqueEntityId(recipientId)
         })

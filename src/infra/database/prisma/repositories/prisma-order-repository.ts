@@ -6,6 +6,7 @@ import { PrismaService } from "../prisma.service";
 import { PrismaOrderMapper } from "../mappers/prisma-order-mapper";
 import { OrderRecipientAddress } from "src/domain/delivery/enterprise/value-objects/order-recipient-address";
 import { PrismaOrderDetailsById } from "../mappers/prisma-order-details-by-id";
+import { DomainEvents } from "src/core/events/domain-events";
 
 @Injectable()
 export class PrismaOrderRepository implements OrderRepository {
@@ -150,6 +151,8 @@ export class PrismaOrderRepository implements OrderRepository {
                 }
             }
         )
+
+        DomainEvents.dispatchEventsForAggregate(order.id)
     }
 
 }

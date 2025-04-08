@@ -66,13 +66,13 @@ Authorization: Bearer {{token}}
 
 ###
 
-POST {{url}}/orders/withdrawn/2
+POST {{url}}/orders/withdrawn/3
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/orders/1
+GET {{url}}/orders/3
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

@@ -8,4 +8,8 @@ export class UniqueEntityId {
     constructor(value?: number) {
         this._value = value ?? Date.now()
     }
+
+    public equals(id: UniqueEntityId) {
+        return id.value === this.value
+    }
 }
