@@ -1,4 +1,5 @@
 import { Body, Controller, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { CreateRecipientUseCase } from "src/domain/delivery/application/use-cases/recipient/create-recipient-use-case";
 import { AuthGuard } from "src/infra/auth/jwt/auth.guard";
 import { Roles } from "src/infra/auth/jwt/authorization/roles.decorator";
@@ -18,6 +19,7 @@ const createRecipientSchema = z.object({
 
 type CreateRecipientSchema = z.infer<typeof createRecipientSchema>
 
+@ApiTags('recipient')
 @Controller('/recipients')
 export class CreateRecipientController{
     constructor(private readonly createRecipientUseCase: CreateRecipientUseCase) {}

@@ -1,4 +1,5 @@
 import { BadRequestException, Body, Controller, HttpCode, NotFoundException, Post, Req } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { ResourceNotFoundError } from "src/core/exceptions/errors/resource-not-found-error";
 import { ChangePasswordUseCase } from "src/domain/delivery/application/use-cases/user/change-password-use-case";
 import { Roles } from "src/infra/auth/jwt/authorization/roles.decorator";
@@ -11,6 +12,7 @@ const changePasswordSchema = z.object({
 
 type ChangePasswordSchema = z.infer<typeof changePasswordSchema>
 
+@ApiTags('user')
 @Controller('/change-password')
 export class ChangePasswordController {
     constructor(

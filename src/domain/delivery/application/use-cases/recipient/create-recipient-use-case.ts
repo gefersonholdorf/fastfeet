@@ -1,4 +1,4 @@
-import { right, type Either } from "src/core/exceptions/either"
+import { right, type Either } from "../../../../../core/exceptions/either"
 import { RecipientRepository } from "../../repositories/recipient-repository"
 import { Recipient } from "src/domain/delivery/enterprise/entities/recipient"
 import { Address } from "src/domain/delivery/enterprise/entities/address"

@@ -1,4 +1,5 @@
 import { BadRequestException, Body, Controller, HttpCode, Post, UnauthorizedException } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { UnauthorizedError } from "src/core/exceptions/errors/unauthorized-error";
 import { LoginUseCase } from "src/domain/delivery/application/use-cases/auth/login-use-case";
 import { Public } from "src/infra/auth/jwt/is-public";
@@ -11,6 +12,7 @@ const loginSchema = z.object({
 
 type LoginSchema = z.infer<typeof loginSchema>
 
+@ApiTags('auth')
 @Controller('/auth/session')
 export class LoginController{
     constructor(private readonly loginUseCase: LoginUseCase) {}

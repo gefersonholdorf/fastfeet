@@ -3,7 +3,9 @@ import { NotFoundError } from "rxjs";
 import { ResourceNotFoundError } from "src/core/exceptions/errors/resource-not-found-error";
 import { GetOrderByIdUseCase } from "src/domain/delivery/application/use-cases/order/get-order-by-id-use-case";
 import { GetOrderByIdPresenter } from "../../presenters/get-order-by-id-presenter";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('order')
 @Controller('/orders/:id')
 export class GetOrderByIdController {
     constructor(private readonly getOrderByIdUseCase: GetOrderByIdUseCase) {}

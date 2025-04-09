@@ -1,4 +1,5 @@
 import { BadRequestException, Body, ConflictException, Controller, HttpCode, NotFoundException, Post } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { ResourceNotFoundError } from "src/core/exceptions/errors/resource-not-found-error";
 import { CreateOrderUseCase } from "src/domain/delivery/application/use-cases/order/create-order-use-case";
 import { Roles } from "src/infra/auth/jwt/authorization/roles.decorator";
@@ -11,6 +12,7 @@ const createOrderSchema = z.object({
 
 type CreateOrderSchema = z.infer<typeof createOrderSchema>
 
+@ApiTags('order')
 @Controller('/orders')
 export class CreateOrderController{
     constructor(private readonly createOrderUseCase: CreateOrderUseCase) {}

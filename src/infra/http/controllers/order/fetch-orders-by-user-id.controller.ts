@@ -2,6 +2,7 @@ import { Controller, Get, HttpCode, Query, Req } from "@nestjs/common";
 import { FetchOrdersByUserIdUseCase } from "src/domain/delivery/application/use-cases/order/fetch-orders-by-user-id-use-case";
 import { z } from "zod";
 import { FetchOrderByUserIdPresenter } from "../../presenters/fetch-order-by-user-id-presenter";
+import { ApiTags } from "@nestjs/swagger";
 
 const paginationParamsSchema = z.object({
     page: z.coerce.number().optional().default(1),
@@ -10,6 +11,7 @@ const paginationParamsSchema = z.object({
 
 type PaginationParams = z.infer<typeof paginationParamsSchema>
 
+@ApiTags('order')
 @Controller('/user/orders')
 export class FetchOrdersByUserIdController {
     constructor(private readonly fetchOrdersByUserIdUseCase: FetchOrdersByUserIdUseCase) {}
