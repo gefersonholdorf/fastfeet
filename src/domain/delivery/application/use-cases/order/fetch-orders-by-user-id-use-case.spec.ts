@@ -1,10 +1,8 @@
-import { OrderRecipientAddress } from "src/domain/delivery/enterprise/value-objects/order-recipient-address";
-import { beforeEach, describe, expect, it, Mocked, vi } from "vitest";
-import { OrderRepository } from "../../repositories/order-repository";
-import { FetchOrdersByAddressUseCase } from "./fetch-orders-by-address-use-case";
-import { FetchOrdersByUserIdUseCase } from "./fetch-orders-by-user-id-use-case";
 import { UniqueEntityId } from "src/core/entities/unique-entity-id";
 import { Order } from "src/domain/delivery/enterprise/entities/order";
+import { beforeEach, describe, expect, it, Mocked, vi } from "vitest";
+import { OrderRepository } from "../../repositories/order-repository";
+import { FetchOrdersByUserIdUseCase } from "./fetch-orders-by-user-id-use-case";
 
 describe('Fetch Orders by user id [UNIT]', () => {
     let orderRepository: Mocked<OrderRepository>

@@ -1,8 +1,8 @@
 import { right, type Either } from "../../../../../core/exceptions/either"
-import { RecipientRepository } from "../../repositories/recipient-repository"
+import { RECIPIENT_REPOSITORY, RecipientRepository } from "../../repositories/recipient-repository"
 import { Recipient } from "src/domain/delivery/enterprise/entities/recipient"
 import { Address } from "src/domain/delivery/enterprise/entities/address"
-import { Injectable } from "@nestjs/common"
+import { Inject, Injectable } from "@nestjs/common"
 
 export interface CreateRecipientUseCaseRequest {
     name: string

@@ -2,8 +2,8 @@ import { PaginationParams } from "src/core/repositories/pagination-params";
 import { RecipientRepository } from "src/domain/delivery/application/repositories/recipient-repository";
 import { Recipient } from "src/domain/delivery/enterprise/entities/recipient";
 import { PrismaRecipientMapper } from "../mappers/prisma-recipient-mapper";
-import { PrismaService } from "../prisma.service";
 import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../prisma.service";
 
 @Injectable()
 export class PrismaRecipientRepository implements RecipientRepository {

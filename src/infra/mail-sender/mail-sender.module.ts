@@ -9,7 +9,7 @@ import { EtherealEmailService } from "./nodemailer/ethereal-email.service";
         {
             provide: EmailService,
             useClass: EtherealEmailService
-        }
+        },
     ],
     exports: [EmailService]
 })

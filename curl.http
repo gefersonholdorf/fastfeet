@@ -21,6 +21,27 @@ Authorization: Bearer {{token}}
     }
 }
 
+###
+
+POST {{url}}/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Felipe Feleps",
+    "email": "felipe@gmail.com",
+    "cpf": "20678456949",
+    "password": "senha123",
+    "role": "ENTREGADOR",
+    "address": {
+        "street": "Rua Topava",
+        "number": 566,
+        "neighborhood": "Toronto",
+        "city": "Balneário",
+        "state": "SC"
+    }
+}
+
 
 ###
 # @name login
@@ -29,7 +50,7 @@ POST {{url}}/auth/session
 Content-Type: application/json
 
 {
-    "cpf": "10678456917",
+    "cpf": "20678456949",
     "password": "senha123"
 }
 
@@ -66,7 +87,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-POST {{url}}/orders/withdrawn/3
+POST {{url}}/orders/withdrawn/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -78,7 +99,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/user/orders?quantityPerPage=1&&page=3
+GET {{url}}/user/orders?quantityPerPage=1&&page=1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
