@@ -1,6 +1,6 @@
 # 🚚 FastFeet
 
-Sistema de gerenciamento de entregas desenvolvido como desafio da formação de Node da Rocketseat. O projeto inclui funcionalidades para controle de entregadores, destinatários, encomendas, envio de e-mail e upload de foto, autenticação(JWT) de usuário e autorização(RBAC).
+Sistema de gerenciamento de entregas desenvolvido como desafio da formação de NodeJS da Rocketseat. O projeto inclui funcionalidades para controle de entregadores, destinatários, encomendas, envio de e-mail, upload de foto, autenticação(JWT) de usuário e autorização(RBAC).
 
 ## 📌 Sobre o Projeto
 
@@ -12,7 +12,7 @@ O **FastFeet** é uma aplicação voltada para gestão de encomendas onde:
 - Sistema envia um e-mail a cada troca de status da encomenda.
 - Possui testes automatizados.
 
-Este projeto foi desenvolvido com foco em boas práticas de API RESTful, usando conceitos de DDD, Domain Events, Clean Architecture, contém autenticação JWT, envio de e-mails com Nodemailer e banco de dados relacional com mysql.
+Este projeto foi desenvolvido com foco em boas práticas de API RESTful, usando conceitos de DDD, Domain Events, Clean Architecture, contendo autenticação JWT, envio de e-mails com Nodemailer e banco de dados relacional com MYSQL.
 
 ## 🚀 Tecnologias
 
